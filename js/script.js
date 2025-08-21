@@ -19,17 +19,19 @@ function showData(dataArray) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("json/data.json")
-    .then(response => response.json())
-    .then(data => {
-      const container = document.getElementById("container");
-      data.forEach(persona => {
-        const p = document.createElement("p");
-        p.textContent = `${persona.nombre} ${persona.apellido}`;
-        container.appendChild(p);
-      });
-    })
-    .catch(error => {
-      console.error("Error al cargar los datos:", error);
-    });
+    // Traigo el archivo JSON
+    fetch("json/data.json")
+        .then(response => response.json())
+        .then(data => {
+            // Busco el contenedor donde voy a mostrar la info
+            const container = document.getElementById("personas");
+
+            // Recorro el JSON y creo un listado de nombres + apellidos
+            data.forEach(persona => {
+                const p = document.createElement("p");
+                p.textContent = `${persona.nombre} ${persona.apellido}`;
+                container.appendChild(p);
+            });
+        })
+        .catch(error => console.error("Error cargando el JSON:", error));
 });
